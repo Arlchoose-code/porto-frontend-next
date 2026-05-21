@@ -1,8 +1,14 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
+}
+
+html.dark {
+  --background: #020617;
+  --foreground: #f8fafc;
 }
 
 @theme inline {
@@ -22,5 +28,184 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: #0f172a;
+  color: #ffffff;
+}
+
+.prose-content {
+  color: inherit;
+}
+
+.prose-content :where(h1, h2, h3) {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  scroll-margin-top: 6rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.prose-content h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+}
+
+.prose-content h2 {
+  font-size: 1.5rem;
+}
+
+.prose-content h3 {
+  font-size: 1.2rem;
+}
+
+.prose-content p,
+.prose-content li {
+  margin: 0.8rem 0;
+  line-height: 1.8;
+}
+
+.prose-content ul,
+.prose-content ol {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.prose-content pre {
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 1rem;
+}
+
+.prose-content code {
+  font-family: var(--font-geist-mono), monospace;
+}
+
+.prose-content a {
+  color: #2563eb;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose-content img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem 0;
+  border-radius: 1rem;
+}
+
+.prose-content blockquote {
+  margin: 1.25rem 0;
+  border-left: 4px solid #14b8a6;
+  padding-left: 1rem;
+  color: #475569;
+}
+
+.dark .prose-content blockquote {
+  color: #cbd5e1;
+}
+
+.ProseMirror img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.ProseMirror-selectednode {
+  outline: 2px solid #06b6d4;
+  outline-offset: 3px;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+.ai-message {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.ai-message h2,
+.ai-message h3 {
+  margin-top: 0.35rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.ai-message h2 {
+  font-size: 1.05rem;
+}
+
+.ai-message h3 {
+  font-size: 0.98rem;
+}
+
+.ai-message h4 {
+  margin-top: 0.2rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.ai-message ul,
+.ai-message ol {
+  display: grid;
+  gap: 0.35rem;
+  padding-left: 1.15rem;
+}
+
+.ai-message ul {
+  list-style: disc;
+}
+
+.ai-message ol {
+  list-style: decimal;
+}
+
+.ai-message code {
+  border-radius: 0.35rem;
+  background: rgba(15, 23, 42, 0.08);
+  padding: 0.1rem 0.25rem;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.92em;
+}
+
+.dark .ai-message code {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.ai-message pre {
+  overflow-x: auto;
+  border-radius: 0.75rem;
+  background: #020617;
+  padding: 0.85rem;
+  color: #cffafe;
+}
+
+.ai-message pre code {
+  background: transparent;
+  padding: 0;
+}
+
+.ai-message blockquote {
+  border-left: 3px solid #22d3ee;
+  padding-left: 0.75rem;
+  color: #64748b;
+}
+
+.dark .ai-message blockquote {
+  color: #cbd5e1;
 }

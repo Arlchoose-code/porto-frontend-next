@@ -17,14 +17,14 @@ export function HomeCertificateCarousel({
   const repeated = items.length > 1 ? [...items, ...items] : items;
 
   useEffect(() => {
-    if (reduce || items.length <= 1) return;
+    if (items.length <= 1) return;
     let frame = 0;
 
     function tick() {
       const node = scrollRef.current;
       if (node && !pausedRef.current) {
         const loopPoint = node.scrollWidth / 2;
-        node.scrollLeft += 0.45;
+        node.scrollLeft += 0.8;
         if (node.scrollLeft >= loopPoint) node.scrollLeft = 0;
       }
       frame = window.requestAnimationFrame(tick);
@@ -35,7 +35,7 @@ export function HomeCertificateCarousel({
       window.cancelAnimationFrame(frame);
       if (resumeTimeoutRef.current) window.clearTimeout(resumeTimeoutRef.current);
     };
-  }, [items.length, reduce]);
+  }, [items.length]);
 
   if (items.length === 0) return null;
 
@@ -78,12 +78,11 @@ export function HomeCertificateCarousel({
         </button>
       </div>
       <motion.div
-        className="cert-scroll flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain pb-2"
+        className="cert-scroll flex snap-x snap-proximity gap-4 overflow-x-auto overscroll-x-contain pb-2"
         ref={scrollRef}
         onBlur={() => resumeAuto()}
         onFocus={pauseAuto}
-        onMouseEnter={pauseAuto}
-        onMouseLeave={() => resumeAuto()}
+        onPointerCancel={() => resumeAuto()}
         onPointerDown={pauseAuto}
         onPointerUp={() => resumeAuto()}
         onTouchEnd={() => resumeAuto()}

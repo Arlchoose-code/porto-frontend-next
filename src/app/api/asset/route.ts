@@ -4,6 +4,10 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
   const path = url.searchParams.get("path") ?? "";
 
+  if (!path && url.searchParams.has("_rsc")) {
+    return new Response(null, { status: 204 });
+  }
+
   if (!path.startsWith("/uploads/")) {
     return new Response("Invalid asset path", { status: 400 });
   }

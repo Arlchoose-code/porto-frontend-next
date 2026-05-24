@@ -53,6 +53,30 @@ html {
   background: rgba(6, 182, 212, 0.45);
 }
 
+@keyframes cert-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(var(--cert-loop-width) * -1));
+  }
+}
+
+.cert-marquee-track {
+  animation: cert-marquee var(--cert-duration, 24s) linear infinite;
+  will-change: transform;
+}
+
+.cert-marquee-track.is-paused {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cert-marquee-track {
+    animation: none;
+  }
+}
+
 ::selection {
   background: #0f172a;
   color: #ffffff;

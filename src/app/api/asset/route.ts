@@ -12,7 +12,17 @@ export async function GET(request: Request) {
     return new Response("Invalid asset path", { status: 400 });
   }
 
-  return fetch(`${API_BASE_URL}${path}`, {
-    cache: "no-store",
+  const upstream = await fetch(`${API_BASE_URL}${path}`, {
+    next: { revalidate: 31536000 },
+  });
+
+  const headers = new Headers(upstream.headers);
+  headers.set("Cache-Control", "public, max-age=31536000, immutable");
+  headers.set("CDN-Cache-Control", "public, max-age=31536000, immutable");
+
+  return new Response(upstream.body, {
+    status: upstream.status,
+    statusText: upstream.statusText,
+    headers,
   });
 }

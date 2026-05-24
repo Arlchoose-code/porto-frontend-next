@@ -221,7 +221,7 @@ export function HomeHero({
               transition={{ duration: 5.8, repeat: Infinity, ease: "easeInOut" }}
             >
               <p className="text-xs font-semibold uppercase text-teal-700 dark:text-teal-300">Working on</p>
-              <p className="mt-1 line-clamp-2 text-sm font-medium leading-6">{profile.working_on ?? "AI-powered portfolio systems"}</p>
+              <p className="mt-1 line-clamp-2 text-sm font-medium leading-6 text-slate-900 dark:text-slate-100">{profile.working_on ?? "AI-powered portfolio systems"}</p>
             </motion.div>
           </div>
 

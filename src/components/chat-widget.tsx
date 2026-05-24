@@ -185,9 +185,9 @@ export function ChatWidget() {
               </div>
             ))}
           </div>
-          <form className="flex gap-2 border-t border-slate-200 p-3 dark:border-slate-800" onSubmit={submit}>
+          <form className="flex gap-2 border-t border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-950" onSubmit={submit}>
             <input
-              className="min-w-0 flex-1 rounded-xl border border-slate-200 bg-transparent px-3 py-2 text-sm outline-none focus:border-cyan-500 dark:border-slate-800"
+              className="min-w-0 flex-1 rounded-xl border border-slate-200 bg-white px-3 py-2 text-base text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-500/10 sm:text-sm dark:border-slate-800 dark:bg-slate-900 dark:text-white dark:placeholder:text-slate-500"
               placeholder="Ask Karina"
               value={input}
               onChange={(event) => setInput(event.target.value)}

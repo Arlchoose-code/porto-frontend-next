@@ -57,6 +57,21 @@ export function ChatWidget() {
   }, [messages, loading]);
 
   useEffect(() => {
+    if (!open) return;
+    const originalOverflow = document.body.style.overflow;
+    const originalPaddingRight = document.body.style.paddingRight;
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+    document.body.style.overflow = "hidden";
+    if (scrollbarWidth > 0) document.body.style.paddingRight = `${scrollbarWidth}px`;
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      document.body.style.paddingRight = originalPaddingRight;
+    };
+  }, [open]);
+
+  useEffect(() => {
     if (open) return;
     const interval = window.setInterval(() => {
       setShowHint(true);
@@ -165,7 +180,7 @@ export function ChatWidget() {
               </button>
             </div>
           </div>
-          <div className="flex-1 space-y-3 overflow-y-auto p-4 text-sm" ref={scrollRef}>
+          <div className="flex-1 space-y-3 overflow-y-auto overscroll-contain p-4 text-sm" ref={scrollRef}>
             {messages.map((message, index) => (
               <div
                 className={`max-w-[85%] rounded-lg px-3 py-2 ${

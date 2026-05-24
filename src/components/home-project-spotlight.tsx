@@ -35,7 +35,7 @@ export function HomeProjectSpotlight({
       <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
         <div className="relative min-h-72 overflow-hidden bg-slate-100 dark:bg-slate-900">
           {imageUrl ? (
-            <Image alt={title} className="object-cover opacity-90" fill sizes="(min-width: 1024px) 52vw, 100vw" src={imageUrl} unoptimized />
+            <Image alt={title} className="object-cover opacity-90" fill sizes="(min-width: 1024px) 52vw, 100vw" src={imageUrl} />
           ) : (
             <div className="grid h-full place-items-center text-cyan-700 dark:text-cyan-200">
               <Rocket className="size-16" />

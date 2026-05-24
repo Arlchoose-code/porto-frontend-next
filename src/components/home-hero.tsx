@@ -187,7 +187,6 @@ export function HomeHero({
                     priority
                     sizes="(min-width: 1024px) 42vw, 100vw"
                     src={avatarUrl}
-                    unoptimized
                   />
                 ) : (
                   <div className="flex h-full items-center justify-center text-7xl font-semibold text-slate-500">

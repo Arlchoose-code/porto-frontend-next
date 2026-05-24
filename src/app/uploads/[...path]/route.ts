@@ -7,7 +7,17 @@ export async function GET(
   const { path } = await params;
   const cleanPath = path.map((part) => encodeURIComponent(part)).join("/");
 
-  return fetch(`${API_BASE_URL}/uploads/${cleanPath}`, {
-    cache: "no-store",
+  const upstream = await fetch(`${API_BASE_URL}/uploads/${cleanPath}`, {
+    next: { revalidate: 31536000 },
+  });
+
+  const headers = new Headers(upstream.headers);
+  headers.set("Cache-Control", "public, max-age=31536000, immutable");
+  headers.set("CDN-Cache-Control", "public, max-age=31536000, immutable");
+
+  return new Response(upstream.body, {
+    status: upstream.status,
+    statusText: upstream.statusText,
+    headers,
   });
 }

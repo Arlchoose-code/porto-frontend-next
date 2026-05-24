@@ -60,7 +60,7 @@ export function mediaUrl(path?: string | null) {
   const normalized = path.startsWith("/") ? path : `/${path}`;
   const uploadIndex = normalized.indexOf("/uploads/");
   if (uploadIndex >= 0) {
-    return `/api/asset?path=${encodeURIComponent(normalized.slice(uploadIndex))}`;
+    return normalized.slice(uploadIndex);
   }
   return normalized;
 }

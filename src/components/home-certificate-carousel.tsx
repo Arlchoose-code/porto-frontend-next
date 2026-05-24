@@ -28,7 +28,7 @@ export function HomeCertificateCarousel({
           <article className="w-72 overflow-hidden rounded-2xl border border-slate-200 bg-[#f8fafc] text-slate-950 dark:border-white/10 dark:bg-white/[0.06] dark:text-white" key={`${item.id}-${index}`}>
             <div className="relative aspect-[16/10] bg-slate-100 dark:bg-slate-900">
               {item.imageUrl ? (
-                <Image alt={item.title} className="object-cover" fill sizes="288px" src={item.imageUrl} unoptimized />
+                <Image alt={item.title} className="object-cover" fill sizes="288px" src={item.imageUrl} />
               ) : (
                 <div className="grid h-full place-items-center text-cyan-700 dark:text-cyan-200">
                   <Award className="size-10" />

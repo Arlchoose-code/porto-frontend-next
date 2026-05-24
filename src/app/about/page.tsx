@@ -104,7 +104,6 @@ export default async function AboutPage({
                       priority
                       sizes="(min-width: 1024px) 360px, 100vw"
                       src={avatarUrl}
-                      unoptimized
                     />
                   ) : (
                     <div className="grid h-full place-items-center text-7xl font-semibold text-slate-500">SH</div>
@@ -256,7 +255,6 @@ export default async function AboutPage({
                         fill
                         sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                         src={logoUrl}
-                        unoptimized
                       />
                     ) : (
                       <div className="grid h-full place-items-center text-cyan-700 dark:text-cyan-300">

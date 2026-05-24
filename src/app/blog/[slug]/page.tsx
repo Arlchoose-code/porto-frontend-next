@@ -141,7 +141,6 @@ export default async function BlogDetailPage({
                   priority
                   sizes="(min-width: 1024px) 1024px, 100vw"
                   src={imageUrl}
-                  unoptimized
                 />
               ) : (
                 <div className="grid h-full place-items-center bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.14),transparent_42%)] text-cyan-700 dark:text-cyan-300">

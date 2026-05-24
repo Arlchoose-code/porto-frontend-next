@@ -38,6 +38,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { createContext, FormEvent, ReactNode, useCallback, useContext, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { RichTextEditor } from "./rich-text-editor";
 
@@ -353,7 +354,7 @@ async function uploadMediaFile(file: File, token: string) {
   form.set("file", file);
   const res = await adminUpload<Record<string, unknown>>("media/upload", token, form);
   const media = res.data ?? {};
-  return String(media.file_path ?? media.file_url ?? "");
+  return preferFullMediaPath(String(media.file_path ?? media.file_url ?? ""));
 }
 
 function publicAssetUrl(path?: unknown) {
@@ -365,6 +366,10 @@ function publicAssetUrl(path?: unknown) {
     return `/api/asset?path=${encodeURIComponent(raw.slice(raw.indexOf("/uploads/")))}`;
   }
   return raw;
+}
+
+function preferFullMediaPath(path: string) {
+  return path.replace(/-thumb(\.[a-z0-9]+)$/i, "-full$1").replace(/-medium(\.[a-z0-9]+)$/i, "-full$1");
 }
 
 function itemMediaPath(item: Record<string, unknown>) {
@@ -1563,6 +1568,7 @@ function MediaPickerModal({
   onSelect: (path: string) => void;
 }) {
   const toast = useAdminToast();
+  const portalTarget = typeof document === "undefined" ? null : document.body;
   const [items, setItems] = useState<Array<Record<string, unknown>>>([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
@@ -1597,7 +1603,7 @@ function MediaPickerModal({
     return path.toLowerCase().includes(needle) || name.toLowerCase().includes(needle);
   });
 
-  return (
+  const modal = (
     <AnimatePresence>
       {open ? (
         <>
@@ -1637,9 +1643,9 @@ function MediaPickerModal({
                         className="group overflow-hidden rounded-2xl border border-slate-200 bg-white text-left shadow-sm transition hover:-translate-y-0.5 hover:border-teal-300 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-teal-600"
                         key={String(item.id ?? path)}
                         type="button"
-                        onClick={() => onSelect(path)}
+                        onClick={() => onSelect(preferFullMediaPath(path))}
                       >
-                        <MediaPreview path={path} />
+                        <MediaPreview path={preferFullMediaPath(path)} />
                         <div className="p-3">
                           <p className="truncate text-sm font-semibold">{String(item.original_name ?? item.file_name ?? "Media")}</p>
                           <p className="mt-1 truncate text-xs text-slate-500">{path}</p>
@@ -1656,17 +1662,20 @@ function MediaPickerModal({
       ) : null}
     </AnimatePresence>
   );
+
+  return portalTarget ? createPortal(modal, portalTarget) : modal;
 }
 
 function MediaPreview({ path, compact = false }: { path?: unknown; compact?: boolean }) {
   const raw = String(path ?? "");
-  const src = publicAssetUrl(raw);
+  const displayPath = preferFullMediaPath(raw);
+  const src = publicAssetUrl(displayPath);
 
   if (!raw) {
     return <div className={`${compact ? "size-12" : "h-28"} grid place-items-center rounded-2xl border border-dashed border-slate-200 bg-slate-50 text-slate-400 dark:border-slate-800 dark:bg-slate-900`}><ImageIcon size={compact ? 16 : 22} /></div>;
   }
 
-  if (isImagePath(raw)) {
+  if (isImagePath(displayPath)) {
     return (
       <div className={`${compact ? "size-12" : "h-44 w-full"} relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-sm dark:border-slate-800 dark:bg-slate-900`}>
         <Image alt="Media preview" className="object-cover" fill sizes={compact ? "48px" : "320px"} src={src} unoptimized />

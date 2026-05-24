@@ -211,7 +211,7 @@ export function ChatWidget() {
             <AnimatePresence>
               {showHint ? (
                 <motion.div
-                  className="hidden rounded-2xl border border-cyan-200 bg-white px-4 py-3 text-sm font-semibold text-slate-800 shadow-xl shadow-cyan-950/10 dark:border-cyan-400/20 dark:bg-slate-950 dark:text-slate-100 sm:block"
+                  className="max-w-[calc(100vw-5.5rem)] rounded-2xl border border-cyan-200 bg-white px-3 py-2 text-xs font-semibold text-slate-800 shadow-xl shadow-cyan-950/10 dark:border-cyan-400/20 dark:bg-slate-950 dark:text-slate-100 sm:px-4 sm:py-3 sm:text-sm"
                   initial={{ opacity: 0, x: 16, y: 8, scale: 0.95 }}
                   animate={{ opacity: 1, x: 0, y: [0, -6, 0], scale: 1 }}
                   exit={{ opacity: 0, x: 12, y: 8, scale: 0.95 }}

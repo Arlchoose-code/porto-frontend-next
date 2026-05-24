@@ -85,7 +85,7 @@ export function HomeHero({
               View projects <ArrowRight size={18} />
             </Link>
             {profile.resume_url ? (
-              <a className="inline-flex h-11 items-center gap-2 rounded-full border border-slate-300 bg-white px-5 font-semibold shadow-sm shadow-slate-200/50 transition hover:-translate-y-0.5 dark:border-slate-700 dark:bg-slate-950 dark:shadow-black/10" href={profile.resume_url}>
+              <a className="inline-flex h-11 items-center gap-2 rounded-full border border-slate-300 bg-white px-5 font-semibold text-slate-950 shadow-sm shadow-slate-200/50 transition hover:-translate-y-0.5 hover:border-slate-400 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:shadow-black/10" href={profile.resume_url}>
                 <Download size={18} /> Resume
               </a>
             ) : null}
@@ -240,9 +240,9 @@ export function HomeHero({
               <span className="size-2 rounded-full bg-amber-400" />
               <span className="size-2 rounded-full bg-emerald-400" />
             </div>
-            <p className="text-cyan-300">&gt; boot portfolio-agent</p>
-            <p className="mt-1 text-slate-300">context: profile + projects + skills</p>
-            <p className="mt-1 text-emerald-300">status: ready_for_collaboration</p>
+            <p className="text-cyan-700 dark:text-cyan-300">&gt; boot portfolio-agent</p>
+            <p className="mt-1 text-slate-700 dark:text-slate-300">context: profile + projects + skills</p>
+            <p className="mt-1 text-emerald-700 dark:text-emerald-300">status: ready_for_collaboration</p>
           </motion.div>
         </motion.div>
       </div>

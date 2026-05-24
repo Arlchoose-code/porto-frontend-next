@@ -56,7 +56,7 @@ export function SiteHeader({ profile }: { profile?: Profile }) {
               "SH"
             )}
           </span>
-          <span className="block truncate text-sm font-semibold tracking-tight sm:text-base">
+          <span className="block truncate text-sm font-semibold tracking-tight text-slate-950 sm:text-base dark:text-white">
             {profile?.site_name ?? "Syahril Haryono"}
           </span>
         </Link>
@@ -154,7 +154,7 @@ export function SiteHeader({ profile }: { profile?: Profile }) {
         {open ? (
           <>
             <motion.div
-              className="absolute left-3 right-3 top-[calc(100%+0.5rem)] z-[90] overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-2 shadow-2xl shadow-slate-950/15 md:hidden dark:border-slate-800/80 dark:bg-slate-950 dark:shadow-black/40"
+              className="absolute left-3 right-3 top-[calc(100%+0.5rem)] z-[90] overflow-hidden rounded-2xl border border-slate-200/80 bg-white/95 p-2 text-slate-950 shadow-2xl shadow-slate-950/15 backdrop-blur-xl md:hidden dark:border-slate-800/80 dark:bg-slate-950/95 dark:text-white dark:shadow-black/40"
               initial={{ opacity: 0, y: -8, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -8, scale: 0.98 }}
